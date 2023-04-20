@@ -1,0 +1,10 @@
+{
+  "type": "object",
+  "properties": {
+    "presets": {
+      "type": "array",
+      "description": "这个一个babel-loader 的预配置"
+    }
+  },
+  "additionalProperties": true
+}

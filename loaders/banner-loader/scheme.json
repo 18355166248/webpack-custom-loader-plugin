@@ -1,0 +1,11 @@
+{
+  "title": "banner-loader options",
+  "type": "object",
+  "properties": {
+    "author": {
+      "type": "string",
+      "description": "这是一个作者名"
+    }
+  },
+  "additionalProperties": false
+}
