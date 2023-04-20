@@ -2,7 +2,6 @@
  * @jest-environment node
  */
 import compiler from "./compiler.js";
-import path from "path";
 
 test("ES2015+语法转成适用于当前浏览器的代码", async () => {
   const stats = await compiler("demo.js", {
