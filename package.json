@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack -c webpack.config.js",
-    "test": "jest"
+    "test": "jest",
+    "debug:plugin": "node --inspect-brk ./node_modules/webpack-cli/bin/cli.js"
   },
   "keywords": [],
   "author": "",

@@ -1,8 +1,11 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // 新增
+const TestPlugin = require("./plugins/test-plugin");
+const BannerWebpackPlugin = require("./plugins/BannerWebpackPlugin");
+const AnalyzerWebpackPlugin = require("./plugins/AnalyzerWebpackPlugin");
 
 module.exports = {
-  mode: "production",
+  mode: "development",
   entry: {
     index: "./src/index.js",
     chunk2: "./src/chunk2.js",
@@ -65,5 +68,8 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name]-[contenthash].css",
     }),
+    // new TestPlugin(), 测试
+    new BannerWebpackPlugin({ author: "SMegalo" }),
+    new AnalyzerWebpackPlugin(),
   ],
 };
