@@ -1,6 +1,6 @@
 import add from "./chunk1.js";
 import commonJs from "./common";
-import "./style.css";
+import "./style/style.css";
 import "./assets/cat.jpeg";
 
 add(1, 2);

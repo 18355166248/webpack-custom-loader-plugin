@@ -1,5 +1,6 @@
 const path = require("path");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin"); // 新增
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const TestPlugin = require("./plugins/test-plugin");
 const BannerWebpackPlugin = require("./plugins/BannerWebpackPlugin");
 const AnalyzerWebpackPlugin = require("./plugins/AnalyzerWebpackPlugin");
@@ -12,13 +13,13 @@ module.exports = {
   },
   output: {
     clean: true, // 在生成文件之前清空 output 目录
-    path: path.resolve(__dirname, "./dist"),
+    path: path.resolve(__dirname, "dist"),
     filename: "[name]:[chunkhash].js",
   },
   module: {
     rules: [
       {
-        test: /\.css/,
+        test: /\.css$/i,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
       },
       {
@@ -34,29 +35,29 @@ module.exports = {
           },
         },
       },
-      {
-        test: /\.js$/,
-        use: {
-          loader: path.resolve(__dirname, "./loaders/babel-loader"),
-          options: {
-            presets: [
-              [
-                "@babel/preset-env",
-                {
-                  targets: {
-                    edge: "17",
-                    firefox: "60",
-                    chrome: "67",
-                    safari: "11.1",
-                  },
-                  useBuiltIns: "usage", // 按需添加
-                  corejs: "3.6.5",
-                },
-              ],
-            ],
-          },
-        },
-      },
+      // {
+      //   test: /\.js$/,
+      //   use: {
+      //     loader: path.resolve(__dirname, "./loaders/babel-loader"),
+      //     options: {
+      //       presets: [
+      //         [
+      //           "@babel/preset-env",
+      //           {
+      //             targets: {
+      //               edge: "17",
+      //               firefox: "60",
+      //               chrome: "67",
+      //               safari: "11.1",
+      //             },
+      //             useBuiltIns: "usage", // 按需添加
+      //             corejs: "3.6.5",
+      //           },
+      //         ],
+      //       ],
+      //     },
+      //   },
+      // },
       {
         test: /\.(png|jpe?g|webp|git)$/,
         loader: path.resolve(__dirname, "./loaders/file-loader"),
@@ -68,8 +69,17 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: "[name]-[contenthash].css",
     }),
+    new HtmlWebpackPlugin({
+      title: "测试 webapck",
+      // filename: "public/index.html",
+    }),
     // new TestPlugin(), 测试
     new BannerWebpackPlugin({ author: "SMegalo" }),
     new AnalyzerWebpackPlugin(),
   ],
+  devServer: {
+    hot: true,
+    port: 9000,
+    open: true,
+  },
 };
