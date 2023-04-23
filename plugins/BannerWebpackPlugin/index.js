@@ -14,8 +14,9 @@ class BannerWebpackPlugin {
         return extensions.includes(ext);
       });
       const prefix = `/*
-      * Author: ${this.options.author}
-      */`;
+* Author: ${this.options.author}
+*/
+`;
       // 3. 遍历资源在顶部添加注释
       assets.forEach((asset) => {
         // 获取代码

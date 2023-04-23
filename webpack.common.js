@@ -6,7 +6,6 @@ const BannerWebpackPlugin = require("./plugins/BannerWebpackPlugin");
 const AnalyzerWebpackPlugin = require("./plugins/AnalyzerWebpackPlugin");
 
 module.exports = {
-  mode: "development",
   entry: {
     index: "./src/index.js",
     chunk2: "./src/chunk2.js",
@@ -15,6 +14,8 @@ module.exports = {
     clean: true, // 在生成文件之前清空 output 目录
     path: path.resolve(__dirname, "dist"),
     filename: "[name]:[chunkhash].js",
+    // 影响按需加载的 chunk 文件
+    chunkFilename: "chunk-[name]:[chunkhash].js",
   },
   module: {
     rules: [
@@ -31,7 +32,7 @@ module.exports = {
         use: {
           loader: path.resolve(__dirname, "./loaders/banner-loader"),
           options: {
-            author: "SMegalo",
+            author: "SMegalo----",
           },
         },
       },
@@ -68,18 +69,29 @@ module.exports = {
     // 提取css插件
     new MiniCssExtractPlugin({
       filename: "[name]-[contenthash].css",
+      // 影响按需加载的 chunk 文件
+      chunkFilename: "chunk-[id]-[contenthash].css",
     }),
     new HtmlWebpackPlugin({
       title: "测试 webapck",
       // filename: "public/index.html",
     }),
     // new TestPlugin(), 测试
-    new BannerWebpackPlugin({ author: "SMegalo" }),
+    new BannerWebpackPlugin({ author: "SMegalo6666" }),
     new AnalyzerWebpackPlugin(),
   ],
-  devServer: {
-    hot: true,
-    port: 9000,
-    open: true,
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        styles: {
+          name: "chunk2-main",
+          type: "css/mini-extract",
+          chunks: (chunk) => {
+            return chunk.name === "chunk2";
+          },
+          enforce: true,
+        },
+      },
+    },
   },
 };
