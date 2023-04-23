@@ -9,6 +9,7 @@ module.exports = {
   entry: {
     index: "./src/index.js",
     chunk2: "./src/chunk2.js",
+    chunk3: "./src/chunk3.js",
   },
   output: {
     clean: true, // 在生成文件之前清空 output 目录
@@ -27,15 +28,16 @@ module.exports = {
         test: /\.js$/,
         use: [path.resolve(__dirname, "./loaders/clean-log-loader")],
       },
-      {
-        test: /\.js$/,
-        use: {
-          loader: path.resolve(__dirname, "./loaders/banner-loader"),
-          options: {
-            author: "SMegalo----",
-          },
-        },
-      },
+      // banner-loader 无效
+      // {
+      //   test: /\.js$/,
+      //   use: {
+      //     loader: path.resolve(__dirname, "./loaders/banner-loader"),
+      //     options: {
+      //       author: "SMegalo----",
+      //     },
+      //   },
+      // },
       // {
       //   test: /\.js$/,
       //   use: {

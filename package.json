@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack serve -c webpack.dev.js",
+    "base": "webpack -c webpack.base.js",
     "prod": "webpack -c webpack.prod.js",
     "test": "jest",
     "debug:plugin": "node --inspect-brk ./node_modules/webpack-cli/bin/cli.js"
